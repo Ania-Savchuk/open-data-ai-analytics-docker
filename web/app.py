@@ -2,8 +2,6 @@ import os
 import json
 import pandas as pd
 from flask import Flask, render_template, send_from_directory
-from sqlalchemy import create_engine
-
 app = Flask(__name__)
 
 DB_HOST = os.getenv("DB_HOST", "db")
