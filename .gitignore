@@ -8,3 +8,5 @@ pycache/
 .venv/
 .env
 .idea
+
+data/
