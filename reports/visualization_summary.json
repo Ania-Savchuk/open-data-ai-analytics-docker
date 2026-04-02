@@ -1,0 +1,28 @@
+{
+    "report_name": "Comprehensive Visualization Report",
+    "timestamp": "2026-04-02T12:49:56.513692",
+    "dataset_size": 497377,
+    "statistics": {
+        "avg_make_year": 2011.9,
+        "avg_capacity": 2361.7,
+        "avg_weight": 1944.9
+    },
+    "top_market_leaders": {
+        "VOLKSWAGEN": 53090,
+        "RENAULT": 29296,
+        "MERCEDES-BENZ": 26853,
+        "BMW": 26032,
+        "AUDI": 24636
+    },
+    "generated_plots": [
+        "01_top_brands.png",
+        "02_make_year_dist.png",
+        "03_fuel_dist.png",
+        "04_capacity_dist.png",
+        "05_weight_dist.png",
+        "06_top_models.png",
+        "07_body_dist.png",
+        "08_correlation_matrix.png",
+        "09_capacity_by_fuel.png"
+    ]
+}

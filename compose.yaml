@@ -74,6 +74,27 @@ services:
     networks:
       - analytics_network
 
+  visualization:
+    build:
+      context: .
+      dockerfile: visualization/Dockerfile
+      network: host
+    container_name: visualization_service
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+      data_load:
+        condition: service_completed_successfully
+      data_research:
+        condition: service_completed_successfully
+    volumes:
+      - ./reports:/app/reports
+      - ./plots:/app/plots
+    networks:
+      - analytics_network
+
 networks:
   analytics_network:
     driver: bridge
