@@ -41,6 +41,7 @@ services:
     build:
       context: .
       dockerfile: data_quality_analysis/Dockerfile
+      network: host
     container_name: data_quality_service
     env_file:
       - .env
@@ -53,6 +54,26 @@ services:
       - ./reports:/app/reports
     networks:
       - analytics_network
+
+  data_research:
+    build:
+      context: .
+      dockerfile: data_research/Dockerfile
+      network: host
+    container_name: data_research_service
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+      data_load:
+        condition: service_completed_successfully
+    volumes:
+      - ./plots:/app/plots
+      - ./reports:/app/reports
+    networks:
+      - analytics_network
+
 networks:
   analytics_network:
     driver: bridge
