@@ -95,6 +95,32 @@ services:
     networks:
       - analytics_network
 
+  web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+      network: host
+    container_name: web_service
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+      data_quality:
+        condition: service_completed_successfully
+      data_research:
+        condition: service_completed_successfully
+      visualization:
+        condition: service_completed_successfully
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+      - ./plots:/app/plots
+    networks:
+      - analytics_network
+
 networks:
   analytics_network:
     driver: bridge
