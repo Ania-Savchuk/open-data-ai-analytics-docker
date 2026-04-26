@@ -6,7 +6,6 @@ pycache/
 
 # Environments
 .venv/
-.env
 .idea
 
 data/
