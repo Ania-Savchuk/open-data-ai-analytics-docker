@@ -9,3 +9,5 @@ pycache/
 .idea
 
 data/
+.terraform/
+*.tfstate*
