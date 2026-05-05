@@ -16,6 +16,5 @@ runcmd:
   - mkdir -p /home/azureuser/app
   - chown azureuser:azureuser /home/azureuser/app
   - git clone https://github.com/Ania-Savchuk/open-data-ai-analytics-docker.git /home/azureuser/app
-  - docker network create analytics_network
   - cd /home/azureuser/app && /usr/local/bin/docker-compose -f compose.yaml up -d
   - cd /home/azureuser/app && /usr/local/bin/docker-compose -f monitoring/docker-compose.monitoring.yml up -d

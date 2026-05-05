@@ -2,7 +2,12 @@ import os
 import json
 import pandas as pd
 from flask import Flask, render_template, send_from_directory
+from prometheus_flask_exporter import PrometheusMetrics  # ДОДАНО
 app = Flask(__name__)
+# Ініціалізація метрик (автоматично створює ендпоінт /metrics)
+metrics = PrometheusMetrics(app)
+# Додавання статичної інформації про застосунок для Prometheus
+metrics.info('app_info', 'Open Data AI Analytics Web Application', version='1.0.0')
 
 DB_HOST = os.getenv("DB_HOST", "db")
 DB_PORT = os.getenv("DB_PORT", "5432")
