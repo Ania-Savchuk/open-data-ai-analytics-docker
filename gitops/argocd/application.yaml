@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: analytics-gitops-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Ania-Savchuk/open-data-ai-analytics-docker.git
+    targetRevision: HEAD
+    path: gitops/app
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: analytics-prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true # Дозволяє Argo CD самому створити namespace analytics-prod

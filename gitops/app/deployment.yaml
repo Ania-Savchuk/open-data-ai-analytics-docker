@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: analytics-web
+  namespace: analytics-prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: analytics
+  template:
+    metadata:
+      labels:
+        app: analytics
+    spec:
+      containers:
+      - name: web-container
+        image: app-web:latest # Твій локальний образ
+        imagePullPolicy: IfNotPresent # Важливо! Каже K8s не шукати його в інтернеті
+        ports:
+        - containerPort: 8000 # Перевір, на якому порту працює твій app-web (можливо 5000 або 80)
