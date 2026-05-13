@@ -5,20 +5,16 @@ packages:
   - curl
 
 runcmd:
-  - apt-get update
-  - apt-get install -y docker.io
-  - systemctl enable --now docker
-
-  - mkdir -p /usr/local/lib/docker/cli-plugins
-  - curl -SL https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose
-  - chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+  - curl -fsSL https://get.docker.com | sh
+  - systemctl enable docker
+  - systemctl start docker
+  - usermod -aG docker azureuser || true
 
   - mkdir -p /home/azureuser/app
   - chown azureuser:azureuser /home/azureuser/app
-  - git clone https://github.com/Ania-Savchuk/open-data-ai-analytics-docker.git /home/azureuser/app
+  - git clone https://github.com/Ania-Savchuk/open-data-ai-analytics-docker.git /home/azureuser/app || true
 
-  - cd /home/azureuser/app && /usr/local/bin/docker-compose -f compose.yaml up -d
-  - sleep 15
-  - cd /home/azureuser/app && /usr/local/bin/docker-compose -f monitoring/docker-compose.monitoring.yml up -d
+  - cd /home/azureuser/app && docker-compose -f compose.yaml up -d
+  - cd /home/azureuser/app && docker-compose -f monitoring/docker-compose.monitoring.yml up -d
 
 final_message: "The system is finally up, after all the debugging!"
